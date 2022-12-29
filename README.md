@@ -1,16 +1,19 @@
-# photo_gallery
+Реализовать галерею на базе React-Native (не React.js) которая будет отображать фотографии из unsplash. Это приложение должно извлекать ресурс в формате JSON.
+Документация REST API :
+[unsplash com/documentation]
 
-photo_gallery
+Токен к API моно получить или использовать следующие: [api unsplash com
+] , ab3411e4ac868c2646c0ed488dfd919ef612b04c264f3374c97fff98ed253dc9 или 896d4f52c589547b2134bd75ed48742db637fa51810b49b607e37e46ab2c0043
 
-## Getting Started
+Приложение должно содержать два экрана(страницы):
+* Список
+- мини изображение с названием и автором
+- когда пользователь нажимает на изображение, открывается экран фотографии
+* Фотография
+- отображает одну фотографию с максимальной площадью.
 
-This project is a starting point for a Flutter application.
+Предпочтительнее инициировать приложение через React Native CLI с помощью команды - react-native init TestApp, нежели чем через команду - create-react-native-app
 
-A few resources to get you started if this is your first Flutter project:
+Если вам не удалось реализовать это тестовое задание или вы рассматриваете аналогичную но более новую технологию - Flutter, c языком программирования Dart, очень похожим на JavaScript, решите это тестовое задание под фреймворком Flutter.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Если у Вас не получилось сделать это тестовое задание или возникли какие-либо вопросы, пожалуйста свяжитесь со мной по электронной почте hr@devsteam.mobi(не сообщением через это сайт) и возможно мы сможем предложить вам неоплачиваемую стажировку или скиньте решение(через git-систему (пример bitbucket) или архивом) на мой электронный адрес hr@devsteam.mobi(не сообщением через это сайт), также можно приложить релизный(!) .apk для простоты проверки. Если "Предлагаемую к применению технологию" не удалось применить, напишите как бы вы ее могли применить в другой ситуации.
