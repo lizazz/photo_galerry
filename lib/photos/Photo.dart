@@ -1,9 +1,9 @@
 class Photo
 {
-  int id = 0;
+  String id = '';
   String name = '';
   String author = '';
-  String url = '';
+  Map<String, dynamic> urls = {};
 }
 
 Photo photo = Photo();

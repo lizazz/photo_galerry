@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'photos/Photos.dart';
-import 'utils.dart' as utils;
 
 void main() {
   startMeUp() async {
@@ -17,26 +16,14 @@ class PhotoGallery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: DefaultTabController(
-        length: 1,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Photo Gallery"),
-            bottom: const TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.photo_album),
-                  text: 'Photos',
-                )
-              ],
-            ),
+      title: 'Photo Gallery',
+      home:  Scaffold(
+        appBar: AppBar(title: const Text('Photo Gallery')),
+          body: Center(
+            child: Card(
+              child: Photos(),
+            )
           ),
-          body: TabBarView(
-            children: [
-              Photos()
-            ],
-          ),
-        ),
       )
     );
   }

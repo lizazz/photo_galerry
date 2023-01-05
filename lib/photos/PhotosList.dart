@@ -13,11 +13,12 @@ class PhotosList extends StatelessWidget
         child: ScopedModelDescendant<BaseModel>(
           builder: (BuildContext context, Widget? inChild, BaseModel inModel) {
             return Scaffold(
+              resizeToAvoidBottomInset : false,
               body: ListView.builder(
                   itemCount: baseModel.entityList.length,
                   itemBuilder: (BuildContext inBuildContext, int inIndex){
                     Photo photo = baseModel.entityList[inIndex];
-                    String photoFile = photo.url;
+                    String photoFile = photo.urls['small'];
                     bool photoFileExists = photoFile.isNotEmpty;
 
                     return Column(

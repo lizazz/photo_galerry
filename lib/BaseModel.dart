@@ -1,10 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:scoped_model/scoped_model.dart';
 import 'photos/Photo.dart';
+import 'package:http/http.dart' as http;
 
 class BaseModel extends Model
 {
   int stackIndex = 0;
-  Map<int, dynamic> entityMapList = {};
+  Map<String, dynamic> entityMapList = {};
   List entityList = [];
   var entityBeingEdited;
   String chosenDate = '';
@@ -22,18 +25,37 @@ class BaseModel extends Model
   void loadData() async
   {
     entityList = [];
-    Photo photo = Photo();
-    photo.id = 1;
-    photo.name = 'Cleem';
-    photo.author = 'John';
-    photo.url = 'https://eleksun.com.ua/sites/default/files/styles/product_main/public/product_img/304120.jpg';
-    entityMapList[photo.id] = photo;
-    entityList.add(photo);
+    dynamic photos = await fetchAlbum();
+
+    if (photos.isNotEmpty) {
+      for (var rawPhoto in photos) {
+        Photo photo = Photo();
+        photo.id = rawPhoto['id'];
+        photo.name = (rawPhoto['description'] != null)
+            ? rawPhoto['description'] : (rawPhoto['alt_description'] != null)
+              ? rawPhoto['alt_description'] : '';
+        photo.author = rawPhoto['user']['username'];
+        photo.urls = rawPhoto['urls'];
+        entityMapList[photo.id] = photo;
+        entityList.add(photo);
+      }
+    }
+
     notifyListeners();
   }
 
-  Future<Photo> get(int inID) async {
+  Future<Photo> get(String inID) async {
     return entityMapList[inID];
+  }
+
+  Future fetchAlbum() async {
+    final response = await http.get(Uri.parse('https://api.unsplash.com/photos/?client_id=zRzvRQSJkzajAQar6YSWORPx7Ul4ZbKdyhT8Qb6FmLA'));
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception("failed to load album");
+    }
   }
 }
 

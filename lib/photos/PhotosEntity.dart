@@ -11,13 +11,15 @@ class PhotosEntity extends StatelessWidget
           builder: (BuildContext context, Widget? inChild, BaseModel inModel)
           {
             return Scaffold(
-              body: Center(
+              resizeToAvoidBottomInset: true,
+              body: SingleChildScrollView(
+                child: IntrinsicHeight(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     (inModel.entityBeingEdited != null && inModel.entityBeingEdited.id != null)
-                        ? Image.network(inModel.entityBeingEdited.url)
-                        : Image.network('https://eleksun.com.ua/sites/default/files/banners/Component%204.png'),
+                        ? Image.network(inModel.entityBeingEdited.urls['raw'])
+                        : Image.network('https://i.stack.imgur.com/kOnzy.gif'),
                      Spacer(),
                     TextButton(
                         onPressed: () {
@@ -29,6 +31,7 @@ class PhotosEntity extends StatelessWidget
                   ],
                 ),
               ),
+              )
             );
           }
       )
