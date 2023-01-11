@@ -14,23 +14,27 @@ class PhotosEntity extends StatelessWidget
               resizeToAvoidBottomInset: true,
               body: SingleChildScrollView(
                 child: IntrinsicHeight(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    (inModel.entityBeingEdited != null && inModel.entityBeingEdited.id != null)
-                        ? Image.network(inModel.entityBeingEdited.urls['raw'])
-                        : Image.network('https://i.stack.imgur.com/kOnzy.gif'),
-                     Spacer(),
-                    TextButton(
-                        onPressed: () {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          inModel.setStackIndex(0);
-                        },
-                        child: const Text("Cancel")
-                    )
-                  ],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children:[
+                          TextButton(
+                              onPressed: () {
+                                FocusScope.of(context).requestFocus(FocusNode());
+                                inModel.setStackIndex(0);
+                              },
+                              child: const Icon(Icons.arrow_back)
+                          )
+                        ]
+                      ),
+                      Spacer(),
+                      (inModel.entityBeingEdited != null && inModel.entityBeingEdited.id != null)
+                          ? Image.network(inModel.entityBeingEdited.urls['regular'])
+                          : Image.network('https://i.stack.imgur.com/kOnzy.gif')
+                    ],
+                  ),
                 ),
-              ),
               )
             );
           }
