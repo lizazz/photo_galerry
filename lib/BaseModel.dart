@@ -8,9 +8,9 @@ class BaseModel extends Model
 {
   int stackIndex = 0;
   Map<String, dynamic> entityMapList = {};
-  List entityList = [];
-  var entityBeingEdited;
-  String chosenDate = '';
+  List<Photo?> entityList = [];
+  Photo? entityBeingEdited;
+  int activePhoto = 0;
 
   void setStackIndex(int inStackIndex)
   {
@@ -56,6 +56,11 @@ class BaseModel extends Model
     } else {
       throw Exception("failed to load album");
     }
+  }
+
+  int getActivePhoto()
+  {
+    return activePhoto;
   }
 }
 

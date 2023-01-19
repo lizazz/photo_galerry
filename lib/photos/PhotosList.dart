@@ -21,8 +21,8 @@ class PhotosList extends StatelessWidget
                      crossAxisCount: 2
                     ),
                     itemBuilder: (BuildContext inBuildContext, int inIndex){
-                      Photo photo = baseModel.entityList[inIndex];
-                      String photoFile = photo.urls['thumb'];
+                      Photo? photo = baseModel.entityList[inIndex];
+                      String photoFile = (photo != null) ? photo.urls['thumb'] : '';
 
                       return GestureDetector(child: Card(
                           child:Padding(
@@ -33,7 +33,7 @@ class PhotosList extends StatelessWidget
                                   child: Container(
                                       color: Colors.black,
                                       child:Text(
-                                        photo.author,
+                                        (photo != null) ? photo.author : '',
                                         overflow: TextOverflow.fade,
                                         maxLines: 1,
                                         softWrap: false,
@@ -62,7 +62,7 @@ class PhotosList extends StatelessWidget
                                             maxLines: 1,
                                             softWrap: false,
                                             textAlign: TextAlign.center,
-                                            photo.name,
+                                            (photo != null) ? photo.name : '',
                                             style: const TextStyle(color: Colors.white),
                                           )
                                       )
@@ -72,8 +72,11 @@ class PhotosList extends StatelessWidget
                           )
                       ),
                       onTap: () async {
-                        baseModel.entityBeingEdited = await baseModel.get(photo.id);
-                        baseModel.setStackIndex(1);
+                        if (photo != null) {
+                          baseModel.entityBeingEdited = await baseModel.get(photo.id);
+                          baseModel.activePhoto = baseModel.entityList.indexOf(photo);
+                          baseModel.setStackIndex(1);
+                        }
                       });
                   }
               ),
